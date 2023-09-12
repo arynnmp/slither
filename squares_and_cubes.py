@@ -1,8 +1,9 @@
 #enter range here
 single_digits = list(range(10))
-squares = []
+print(single_digits)
 
 #prints list of squares using loop and append
+squares = []
 for digit in single_digits:
   squares.append(digit ** 2)
   print(digit)
