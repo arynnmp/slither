@@ -1,0 +1,13 @@
+#enter range here
+single_digits = list(range(10))
+squares = []
+
+#prints list of squares using loop and append
+for digit in single_digits:
+  squares.append(digit ** 2)
+  print(digit)
+print(squares)
+
+#prints list of cubes using list comprehension
+cubes = [num ** 3 for num in single_digits]
+print(cubes)
