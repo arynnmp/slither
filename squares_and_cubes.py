@@ -6,7 +6,6 @@ print(single_digits)
 squares = []
 for digit in single_digits:
   squares.append(digit ** 2)
-  print(digit)
 print(squares)
 
 #prints list of cubes using list comprehension
