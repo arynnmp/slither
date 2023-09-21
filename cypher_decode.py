@@ -1,7 +1,59 @@
+#encrypt or decrypt a message
+
+import string
+alphabet = string.ascii_lowercase
+
+#enter a message you want to encrypt, and a keyword 
+#they keyword is used recursively to offset each of the message's characters!
+
+my_message = "well would you look at that, your coding proficiency is enough to read this!"
+my_keyword = "purple"
+
+#takes the message and encrypts it using your keyword
+#the index of each letter in the keyword is the offset for the encrption
+#the keyword repeats recursively your whole message
+def encrypt_message(message, keyword):
+    keyword_phrase = ""
+    keyword_index = 0
+    for character in message:
+        #this part allows the keyword to keep cycling through in parallel with your message
+        if keyword_index >= len(keyword):
+            keyword_index = 0
+        #adding a keyword letter for every letter's index in your message 
+        if character in alphabet:
+            keyword_phrase += keyword[keyword_index]
+            keyword_index += 1
+        #including everyting that's not a letter!
+        else:
+            keyword_phrase += character
+
+    encoded_message = ""
+
+    #at every index of the message, subract they keyword's alphabet index at that position
+    #add that new character to the encoded message
+    for i in range(len(message)):
+        if message[i] in alphabet:
+            old_message_index = alphabet.find(message[i])
+            keyword_offset = alphabet.find(keyword_phrase[i])
+            new_message_character = alphabet[(old_message_index - keyword_offset)]
+            encoded_message += new_message_character
+        else:
+            encoded_message += message[i]
+
+    return encoded_message
+
+print(encrypt_message(my_message, my_keyword))
+
+#----------------------------------------------------------------------------------------------------------------
+
+#Now for the opposite! decrypt a message
 #this function takes an encrypted message, and the keyword (recursive) used to determine the offset of each letter
 
+#message you want to decode and the keyword to determine offsets
+vigenere_message = "txm srom vkda gl lzlgzr qpdb? fepb ejac! ubr imn tapludwy mhfbz cza ruxzal wg zztcgcexxch!"
+vigenere_keyword = "friends"
+
 def vigenere_decode(message, keyword):
-    alphabet = "abcdefghijklmnopqrstuvwxyz"
     #adding a loop to assign every letter in the message to a letter in the keyword phrase
     keyword_phrase = ""
     keyword_index = 0
@@ -43,8 +95,5 @@ def vigenere_decode(message, keyword):
 
     return decoded_message
 
-#message you want to decode and the keyword to determine offsets
-vigenere_message = "txm srom vkda gl lzlgzr qpdb? fepb ejac! ubr imn tapludwy mhfbz cza ruxzal wg zztcgcexxch!"
-vigenere_keyword = "friends"
 
 print(vigenere_decode(vigenere_message, vigenere_keyword))
